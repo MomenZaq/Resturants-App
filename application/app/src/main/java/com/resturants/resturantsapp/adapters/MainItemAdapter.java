@@ -40,7 +40,7 @@ public class MainItemAdapter extends RecyclerView.Adapter<MainItemAdapter.OrderH
         ItemModel itemModel = list.get(position);
         holder.txvItemName.setText(itemModel.getItemName());
         holder.txvItemDistance.setText(itemModel.getItemDistance() + " م");
-        holder.txvItemArea.setText(itemModel.getItemDistance());
+        holder.txvItemArea.setText(itemModel.getItemArea());
 
 
         //create simple animation
