@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Resturants app</string>
+    <string name="your_direction">حدد وجهتك</string>
+    <string name="restaurants">المطاعم</string>
+    <string name="Coffees">المقاهي</string>
+    <string name="restaurants_coffees">المطاعم / المقاهي</string>
+    <string name="search">بحث</string>
+    <string name="near_restaurant">المطعم الأقرب لك:</string>
+</resources>
