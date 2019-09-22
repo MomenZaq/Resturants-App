@@ -16,6 +16,7 @@ public class FirebaseUtility {
     public static final String RATES = "rates";
 
     public static DatabaseReference getDatabaseReference() {
+        //get the path of database
         return FirebaseDatabase.getInstance().getReference().child(RATES);
     }
 
@@ -33,8 +34,9 @@ public class FirebaseUtility {
 
                         System.out.println("THEDATAIGOTIS22: " + dataSnapshot1.toString());
                         for (DataSnapshot dataSnapshot : dataSnapshot1.getChildren()) {
-//
+// get all database children
                             try {
+//get RateModel object
                                 RateModel rateModel = dataSnapshot.getValue(RateModel.class);
 
 
@@ -65,16 +67,17 @@ public class FirebaseUtility {
         }
     }
 
-    public static void addRates(Context context,  RateModel rateModel) {
+    public static void addRates(Context context, RateModel rateModel) {
         try {
 
+            // set the path of database, databaseName > itemName > userEmail ; it should be unique.
             DatabaseReference mDatabase = getDatabaseReference()
                     .child(rateModel.getItemName() + "")
                     //Firebase Database paths must not contain '.'
-                    .child(rateModel.getUserEmail().replace(".","-")+ "");
+                    .child(rateModel.getUserEmail().replace(".", "-") + "");
 
 
-            mDatabase.setValue(rateModel ).
+            mDatabase.setValue(rateModel).
                     addOnSuccessListener(aVoid ->
                             System.out.println("THESUBSCRIPTION2: done")).
                     addOnFailureListener(e ->
