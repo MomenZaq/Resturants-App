@@ -1,0 +1,24 @@
+{
+  "rates" : {
+    "المطعم رقم 1" : {
+      "ahmed@gmail-com" : {
+        "comment" : "جميل ولذيذ",
+        "itemName" : "المطعم رقم 1",
+        "userEmail" : "ahmed@gmail.com",
+        "userName" : "أحمد"
+      },
+      "mahmoud@gmail-com" : {
+        "comment" : "رائع ",
+        "itemName" : "المطعم رقم 1",
+        "userEmail" : "mahmoud@gmail.com",
+        "userName" : "محمود"
+      },
+      "mohammed@gmail-com" : {
+        "comment" : "جميل وطيب",
+        "itemName" : "المطعم رقم 1",
+        "userEmail" : "mohammed@gmail.com",
+        "userName" : "محمد"
+      }
+    }
+  }
+}

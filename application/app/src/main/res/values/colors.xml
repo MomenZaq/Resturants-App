@@ -5,7 +5,12 @@
     <color name="colorAccent">#85CCFF</color>
     <color name="colorBackground">#FDFDFD</color>
     <color name="colorFont">#0F0F0F</color>
+    <color name="colorFont2">#CD0F0F0F</color>
     <color name="colorWhite">#FFF</color>
     <color name="gray">#929191</color>
+    <color name="gray2">#C7C6C6</color>
+    <color name="gray3">#F0F0F0</color>
+    <color name="red">#AC0106</color>
+    <color name="green">#328101</color>
 
 </resources>

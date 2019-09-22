@@ -2,6 +2,8 @@ package com.resturants.resturantsapp.adapters;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,9 +12,13 @@ import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.ActivityOptionsCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.resturants.resturantsapp.R;
+import com.resturants.resturantsapp.activities.ItemProfileActivity;
+import com.resturants.resturantsapp.activities.ItemsActivity;
+import com.resturants.resturantsapp.activities.MainActivity;
 import com.resturants.resturantsapp.model.ItemModel;
 
 import java.util.ArrayList;
@@ -21,7 +27,7 @@ import java.util.List;
 public class MainItemAdapter extends RecyclerView.Adapter<MainItemAdapter.OrderHolder> {
     private List<ItemModel> list;
     private Activity activity;
-    private int lastPosition=-1;
+    private int lastPosition = -1;
 
     public MainItemAdapter(List<ItemModel> list, Activity activity) {
         this.list = list;
@@ -49,6 +55,19 @@ public class MainItemAdapter extends RecyclerView.Adapter<MainItemAdapter.OrderH
                         : R.anim.downfromtop);
         holder.itemView.startAnimation(animation);
         lastPosition = position;
+
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(activity, ItemProfileActivity.class);
+                    // create fade animation
+                 Bundle bundle = ActivityOptionsCompat.makeCustomAnimation(activity,
+                        android.R.anim.fade_in, android.R.anim.fade_out).toBundle();
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                activity.startActivity(intent, bundle);
+            }
+        });
     }
 
 

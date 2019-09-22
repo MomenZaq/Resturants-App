@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "471927126153",
+    "firebase_url": "https://ween-94618.firebaseio.com",
+    "project_id": "ween-94618",
+    "storage_bucket": "ween-94618.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:471927126153:android:9737cbaecb9d39fdd16e58",
+        "android_client_info": {
+          "package_name": "com.resturants.resturantsapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "471927126153-nh9ocegtut5n351347r7csub8p2r2u4n.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.resturants.resturantsapp",
+            "certificate_hash": "7c93987bddba76c215fc843743bc12f322dbc001"
+          }
+        },
+        {
+          "client_id": "471927126153-vv1rlgul6jprd4qn1adtas7h2vtg6nek.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAhtBRJC9g_2oIWD__b_zJtIuZiyTNw7vE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "471927126153-vv1rlgul6jprd4qn1adtas7h2vtg6nek.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -65,5 +66,16 @@ public class ItemsActivity extends ParentActivity {
 
         MainItemAdapter itemAdapter = new MainItemAdapter(itemModelList, this);
         recycler.setAdapter(itemAdapter);
+    }
+
+    public void setting(View view) {
+        openSetting();
+    }
+
+    public void logout(View view) {
+    }
+
+    public void back(View view) {
+        onBackPressed();
     }
 }

@@ -50,11 +50,19 @@ public class MainActivity extends ParentActivity {
             public void onClick(View v) {
 
                 Intent intent = new Intent(MainActivity.this, ItemsActivity.class);
-                Bundle bundle = ActivityOptionsCompat.makeCustomAnimation(MainActivity.this,
+                   // create fade animation
+                 Bundle bundle = ActivityOptionsCompat.makeCustomAnimation(MainActivity.this,
                         android.R.anim.fade_in, android.R.anim.fade_out).toBundle();
                 startActivity(intent, bundle);
             }
         });
 
+    }
+
+    public void setting(View view) {
+        openSetting();
+    }
+
+    public void logout(View view) {
     }
 }

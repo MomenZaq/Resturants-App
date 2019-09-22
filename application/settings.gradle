@@ -1,1 +1,2 @@
-include ':app'
+include ':app', ':androidtagview2'
+project(':androidtagview2').projectDir = new File('androidtagview')

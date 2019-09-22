@@ -1,9 +1,11 @@
 package com.resturants.resturantsapp.utils;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Build;
+import android.util.DisplayMetrics;
 
 import java.util.Locale;
 
@@ -25,5 +27,20 @@ public class Methods {
         } catch (Exception ignored) {
         }
     }
+    public static int getScreenWidth(Activity activity) {
+//        DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
+//            int newTabMinWidth = parent.getWidth() / list.size();
+//        return displayMetrics.widthPixels;
 
+
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        if (Build.VERSION.SDK_INT >= 17) {
+            activity.getWindowManager().getDefaultDisplay().getRealMetrics(displayMetrics);
+        } else {
+            activity.getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        }
+
+        return displayMetrics.widthPixels;
+
+    }
 }
