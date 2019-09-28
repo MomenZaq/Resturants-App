@@ -16,6 +16,7 @@ public class SettingActivity extends ParentActivity {
     }
 
     public void logout(View view) {
+        logout();
     }
 
     public void back(View view) {

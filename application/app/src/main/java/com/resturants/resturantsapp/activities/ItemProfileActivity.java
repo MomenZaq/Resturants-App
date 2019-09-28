@@ -64,6 +64,7 @@ public class ItemProfileActivity extends ParentActivity {
     }
 
     public void logout(View view) {
+        logout();
     }
 
     public void setting(View view) {

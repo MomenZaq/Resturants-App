@@ -64,5 +64,6 @@ public class MainActivity extends ParentActivity {
     }
 
     public void logout(View view) {
+        logout();
     }
 }

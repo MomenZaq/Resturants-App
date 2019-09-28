@@ -32,4 +32,19 @@
     <string name="details">معلومات</string>
     <string name="rate">تقييم</string>
     <string name="public_rate">تقييم العام</string>
+    <string name="enter_valid_email_address">أدخل ايميل صحيح</string>
+    <string name="enter_password_more_than_five_letters">أدخل كلمة مرور أطول من خمس حروف</string>
+    <string name="enter_name_more_than_four_letters">أدخل اسم اكبر من اربع حروف</string>
+    <string name="enter_same_password">أدخل كلمة مرور متطابقة</string>
+    <string name="please_enter_valid_data">أدخل بيانات صحيحة للتسجيل</string>
+    <string name="successfully_sign_in">تم تسجيل الدخول بنجاح</string>
+    <string name="email_is_not_registered_you_can_sign_up">هذا الايميل غير مسجل مسبقاً, يرجى تسجيل حساب جديد</string>
+    <string name="wrong_password">خطأ في كلمة المرور</string>
+    <string name="please_enter_strong_password">رجاء أدخل كلمة مرور قوية</string>
+    <string name="the_email_is_already_registered_you_can_sign_in">الإيميل مسجل مسبقاً</string>
+    <string name="error_in_registration">حصل خطأ في التسجيل</string>
+    <string name="send_done">تم الإرسال بنجاح</string>
+    <string name="send_done_error">خطأ في الإرسال</string>
+    <string name="email_not_found">الايميل غير موجود</string>
+    <string name="logout_done">تم تسجيل خروج بنجاح</string>
 </resources>

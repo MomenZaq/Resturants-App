@@ -3,12 +3,14 @@ package com.resturants.resturantsapp.activities;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityOptionsCompat;
 
 import com.resturants.resturantsapp.R;
 import com.resturants.resturantsapp.utils.LanguageHelper;
+import com.resturants.resturantsapp.utils.SharedPreferensessClass;
 
 import io.github.inflationx.viewpump.ViewPumpContextWrapper;
 
@@ -35,11 +37,16 @@ public abstract class ParentActivity extends AppCompatActivity {
     }
 
 
-    public void openSetting(){
+    public void openSetting() {
         Intent intent = new Intent(this, SettingActivity.class);
-           // create fade animation
-                 Bundle bundle = ActivityOptionsCompat.makeCustomAnimation(this,
+        // create fade animation
+        Bundle bundle = ActivityOptionsCompat.makeCustomAnimation(this,
                 android.R.anim.fade_in, android.R.anim.fade_out).toBundle();
         startActivity(intent, bundle);
+    }
+
+    public void logout() {
+        SharedPreferensessClass.getInstance(getBaseContext()).signOut();
+        Toast.makeText(this, getResources().getString(R.string.logout_done), Toast.LENGTH_SHORT).show();
     }
 }
