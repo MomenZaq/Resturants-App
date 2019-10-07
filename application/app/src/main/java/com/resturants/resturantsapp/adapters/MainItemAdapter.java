@@ -15,12 +15,15 @@ import androidx.annotation.NonNull;
 import androidx.core.app.ActivityOptionsCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.resturants.resturantsapp.R;
 import com.resturants.resturantsapp.activities.ItemProfileActivity;
 import com.resturants.resturantsapp.activities.ItemsActivity;
 import com.resturants.resturantsapp.activities.MainActivity;
 import com.resturants.resturantsapp.model.ItemModel;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -65,6 +68,16 @@ public class MainItemAdapter extends RecyclerView.Adapter<MainItemAdapter.OrderH
                  Bundle bundle = ActivityOptionsCompat.makeCustomAnimation(activity,
                         android.R.anim.fade_in, android.R.anim.fade_out).toBundle();
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+                ItemModel itemObject = list.get(holder.getAdapterPosition());
+                Gson gson = new Gson();
+                Type type2 = new TypeToken<ItemModel>() {
+                }.getType();
+                String json = gson.toJson(itemObject , type2);
+                intent.putExtra(ItemProfileActivity.EXTRA_SELECTED_ITEM_EXTRA, json);
+
+
+
                 activity.startActivity(intent, bundle);
             }
         });

@@ -47,16 +47,9 @@ public class ViewPagerHelper implements TabSelectInterface, ViewPager.OnPageChan
 
 
         LinearLayoutManager linearLayoutManagerTabs = new LinearLayoutManager(activity, RecyclerView.HORIZONTAL, false);
-
         recyclerViewTabs.setLayoutManager(linearLayoutManagerTabs);
 
-        recyclerViewTabs.setNestedScrollingEnabled(false);
-        ViewCompat.setNestedScrollingEnabled(recyclerViewTabs, false);
-        recyclerViewTabs.setHasFixedSize(true);
-        recyclerViewTabs.setItemViewCacheSize(20);
-        recyclerViewTabs.setDrawingCacheEnabled(true);
-        recyclerViewTabs.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
-        recyclerViewTabs.setDrawingCacheEnabled(false);
+
         setTabsAdapter();
         setFragmentsAdapter();
 

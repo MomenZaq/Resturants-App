@@ -68,16 +68,6 @@ public class SharedPreferensessClass {
         editor.commit();
     }
 
-    public String getUserPhoto() {
-
-        return sharedPreferences.getString("UserPhoto", "");
-    }
-
-    public void setUserPhoto(String userEmail) {
-
-        editor.putString("UserPhoto", userEmail);
-        editor.commit();
-    }
 
 
     public int getUserId() {
@@ -91,9 +81,21 @@ public class SharedPreferensessClass {
         editor.commit();
     }
 
+
+
+    public int getSearchDistance() {
+
+        return sharedPreferences.getInt("SearchDistance", 10000);
+    }
+
+    public void setSearchDistance(int searchDistance) {
+
+        editor.putInt("SearchDistance", searchDistance);
+        editor.commit();
+    }
+
     public void signOut() {
         setUserId(0);
-        setUserPhoto("");
         setUserName("");
         setUserEmail("");
 

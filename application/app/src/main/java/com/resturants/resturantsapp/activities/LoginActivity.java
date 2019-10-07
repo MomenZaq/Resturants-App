@@ -15,7 +15,6 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthInvalidUserException;
@@ -54,7 +53,6 @@ public class LoginActivity extends ParentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
 
 
         //check if the user already signed go to main.
@@ -105,7 +103,7 @@ public class LoginActivity extends ParentActivity {
                 if (btnRegister.getText().equals(getResources().getString(R.string.login))) {
                     displayLogin();
                 } else {
-                    displyRegisteration();
+                    displayRegistrations();
 
                 }
             }
@@ -132,7 +130,7 @@ public class LoginActivity extends ParentActivity {
 
     }
 
-    private void displyRegisteration() {
+    private void displayRegistrations() {
         linearLogin.setVisibility(View.GONE);
         linearRecover.setVisibility(View.GONE);
         linearRegister.setVisibility(View.VISIBLE);
@@ -282,27 +280,28 @@ public class LoginActivity extends ParentActivity {
         showProcess();
 
         mAuth = FirebaseAuth.getInstance();
-        mAuth.sendPasswordResetEmail(email).addOnCompleteListener(this, task -> {
-            hideProcess();
-            if (task.isSuccessful()) {
-                Toast.makeText(this, getResources().getString(R.string.send_done), Toast.LENGTH_SHORT).show();
-                displayLogin();
-            } else {
-                Log.w("SIGNINEMAIL", "signInWithEmail:failed", task.getException());
-                try {
-                    throw task.getException();
-                } catch (FirebaseAuthInvalidUserException weakPassword) {
-                    Log.d(TAG, "onComplete: weak_password");
+        mAuth.sendPasswordResetEmail(email)
+                .addOnCompleteListener(this, task -> {
+                    hideProcess();
+                    if (task.isSuccessful()) {
+                        Toast.makeText(this, getResources().getString(R.string.send_done), Toast.LENGTH_SHORT).show();
+                        displayLogin();
+                    } else {
+                        Log.w("SIGNINEMAIL", "signInWithEmail:failed", task.getException());
+                        try {
+                            throw task.getException();
+                        } catch (FirebaseAuthInvalidUserException weakPassword) {
+                            Log.d(TAG, "onComplete: weak_password");
 
-                    edtRecoverEmail.setError(getResources().getString(R.string.email_not_found));
+                            edtRecoverEmail.setError(getResources().getString(R.string.email_not_found));
 
-                } catch (Exception e) {
-                    Toast.makeText(this, getResources().getString(R.string.send_done_error), Toast.LENGTH_SHORT).show();
-                }
+                        } catch (Exception e) {
+                            Toast.makeText(this, getResources().getString(R.string.send_done_error), Toast.LENGTH_SHORT).show();
+                        }
 //
 
-            }
-        });
+                    }
+                });
     }
 
     public void signUpEmail(Context context, String email, String name, String password) {

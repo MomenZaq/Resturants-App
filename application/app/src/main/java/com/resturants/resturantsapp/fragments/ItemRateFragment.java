@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.resturants.resturantsapp.R;
 import com.resturants.resturantsapp.adapters.MainCommentAdapter;
 import com.resturants.resturantsapp.database.FirebaseUtility;
+import com.resturants.resturantsapp.model.ItemModel;
 import com.resturants.resturantsapp.model.RateModel;
 
 import java.util.ArrayList;
@@ -34,14 +35,15 @@ public class ItemRateFragment extends Fragment {
     private EditText edtContent;
     private ImageButton btnSend;
     private RecyclerView recycle;
-
+    ItemModel itemModel;
     public ItemRateFragment() {
     }
 
 
     @SuppressLint("ValidFragment")
-    public ItemRateFragment(Activity activity) {
+    public ItemRateFragment(Activity activity, ItemModel itemModel) {
         this.activity = activity;
+        this.itemModel = itemModel;
     }
 
 

@@ -20,11 +20,10 @@ public class FirebaseUtility {
         return FirebaseDatabase.getInstance().getReference().child(RATES);
     }
 
-    public static void getRates(final Context context) {
+    public static void getRates(final Context context, String itemName) {
         try {
 
-            final DatabaseReference mDatabase = FirebaseDatabase.getInstance()
-                    .getReference().child(RATES);
+            final DatabaseReference mDatabase =getDatabaseReference().child(itemName + "");
             mDatabase.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@Nullable DataSnapshot dataSnapshot1) {

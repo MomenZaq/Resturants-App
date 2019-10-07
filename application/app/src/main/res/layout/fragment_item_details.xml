@@ -1,100 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="@color/colorBackground"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:background="@color/colorBackground">
 
 
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content" android:gravity="start"
-    android:orientation="vertical"
-    android:padding="16dp">
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/address"
-        android:textAppearance="@style/fontLight"
-        android:textColor="@color/colorFont2"
-        android:textSize="16sp"></TextView>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="عنوان المكان بالتفصيل"
-        android:layout_marginTop="5dp"
-        android:textColor="@color/colorFont"
-        android:textSize="16sp"></TextView>
-
-    <View
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
-        android:background="@color/gray2"/>
-    <TextView
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/hours"
-        android:textAppearance="@style/fontLight"
-        android:textColor="@color/colorFont2"
-        android:textSize="16sp"></TextView>
+        android:gravity="start"
+        android:orientation="vertical"
+        android:padding="16dp">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="حتى الساعة 12 صباحاً"
-        android:layout_marginTop="5dp"
-        android:textColor="@color/colorFont"
-        android:textSize="16sp"></TextView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/address"
+            android:textAppearance="@style/fontLight"
+            android:textColor="@color/colorFont2"
+            android:textSize="16sp"></TextView>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
-        android:background="@color/gray2"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/phone"
-        android:textAppearance="@style/fontLight"
-        android:textColor="@color/colorFont2"
-        android:textSize="16sp"></TextView>
+        <TextView
+            android:id="@+id/txv_details"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="عنوان المكان بالتفصيل"
+            android:textColor="@color/colorFont"
+            android:textSize="16sp"></TextView>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="920026264"
-        android:layout_marginTop="5dp"
-        android:textColor="@color/colorFont"
-        android:textSize="16sp"></TextView>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:background="@color/gray2" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
-        android:background="@color/gray2"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="الخريطة"
-        android:textAppearance="@style/fontLight"
-        android:textColor="@color/colorFont2"
-        android:textSize="16sp"></TextView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/hours"
+            android:textAppearance="@style/fontLight"
+            android:textColor="@color/colorFont2"
+            android:textSize="16sp"></TextView>
 
-    <fragment xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:map="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/map"
-        android:layout_marginTop="20dp"
-        android:name="com.google.android.gms.maps.SupportMapFragment"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        tools:context=".activities.MapsActivity" />
-</LinearLayout>
+        <TextView
+            android:id="@+id/txv_hours"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="حتى الساعة 12 صباحاً"
+            android:textColor="@color/colorFont"
+            android:textSize="16sp"></TextView>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:background="@color/gray2" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/phone"
+            android:textAppearance="@style/fontLight"
+            android:textColor="@color/colorFont2"
+            android:textSize="16sp"></TextView>
+
+        <TextView
+            android:id="@+id/txv_phone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="920026264"
+            android:textColor="@color/colorFont"
+            android:textSize="16sp"></TextView>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:background="@color/gray2" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="الخريطة"
+            android:textAppearance="@style/fontLight"
+            android:textColor="@color/colorFont2"
+            android:textSize="16sp"></TextView>
+
+        <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:map="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/map"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginTop="20dp"
+            tools:context=".activities.MapsActivity" />
+    </LinearLayout>
 </ScrollView>

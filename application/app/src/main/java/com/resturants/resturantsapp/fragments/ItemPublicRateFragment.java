@@ -16,6 +16,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.resturants.resturantsapp.R;
+import com.resturants.resturantsapp.model.ItemModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +27,7 @@ public class ItemPublicRateFragment extends Fragment {
     View v;
     boolean newCreation = true;
     Activity activity;
-
+    ItemModel itemModel;
     private TextView txvRate;
     private RatingBar rate;
     private TextView txvNeg;
@@ -39,8 +40,9 @@ public class ItemPublicRateFragment extends Fragment {
 
 
     @SuppressLint("ValidFragment")
-    public ItemPublicRateFragment(Activity activity) {
+    public ItemPublicRateFragment(Activity activity, ItemModel itemModel) {
         this.activity = activity;
+        this.itemModel = itemModel;
     }
 
 
@@ -79,6 +81,14 @@ public class ItemPublicRateFragment extends Fragment {
             tags = (TagContainerLayout) v.findViewById(R.id.tags);
 
 
+            rate.setRating(itemModel.getRating());
+
+            int posRate = itemModel.getRating() * 20;
+            int negRate = 100 - posRate;
+            txvPos.setText(posRate + "");
+            txvNeg.setText(negRate + "");
+
+
             //set comments tags
             List<String> userWin = new ArrayList<>();
             //just for test
@@ -94,6 +104,8 @@ public class ItemPublicRateFragment extends Fragment {
             Typeface typeface = Typeface.createFromAsset(activity.getAssets(), "Changa-SemiBold.ttf");
             tags.setTagTypeface(typeface);
             tags.setTags(userWin);
+
+
         }
     }
 
