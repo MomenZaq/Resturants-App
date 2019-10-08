@@ -49,7 +49,8 @@
     <string name="logout_done">تم تسجيل خروج بنجاح</string>
     <string name="permession_needed">يجب الحصول على صلاحية الموقع</string>
     <string name="storage_permession_needed_to_capture_image_and_share_it">يجب الحصول على صلاحية الموقع لاتمام بعض المهام</string>
-    <string name="api_key">AIzaSyD-u9pf8aOaxPyEOKLLENEY89I78K9eiTI</string>
+    <string name="api_key">AIzaSyDgeckahFdnj56zTlipjeQVGmz_f4zdWPQ</string>
     <string name="near_restaurant_coffee">المطعم والمقهى الأقرب لك</string>
     <string name="near_cofee">المقهى الأقرب لك</string>
+    <string name="open_now">فاتح الآن</string>
 </resources>

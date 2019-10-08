@@ -83,7 +83,12 @@ public class ItemDetailsFragment extends Fragment implements OnMapReadyCallback 
 
 
             txvDetails.setText(itemModel.getItemArea());
-            txvHours.setText(itemModel.getOpening_hours());
+            String openNow="لا";
+            if (itemModel.getOpening_hours().equals("true")){
+                openNow="نعم";
+            }
+            txvHours.setText(openNow);
+
             txvPhone.setText(itemModel.getPhone());
             //execute codes
 
@@ -96,6 +101,6 @@ public class ItemDetailsFragment extends Fragment implements OnMapReadyCallback 
         // Add a marker in Sydney and move the camera
         LatLng sydney = itemModel.getLatLng();
         mMap.addMarker(new MarkerOptions().position(sydney).title(itemModel.getItemName()));
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney,18));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney,12));
     }
 }

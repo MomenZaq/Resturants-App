@@ -90,26 +90,26 @@ public class ItemRateFragment extends Fragment {
 
 
             //just for test
-            List<RateModel> itemModelList = new ArrayList<>();
-            RateModel itemModel = new RateModel("أحمد", "ahmed@gmail.com", "المطعم رقم 1", "جميل ولذيذ");
-            itemModelList.add(itemModel);
-//just for test, add some comments to database
-            FirebaseUtility.addRates(activity,  itemModel);
-
-            itemModel = new RateModel("محمد", "mohammed@gmail.com", "المطعم رقم 1", "جميل وطيب");
-            itemModelList.add(itemModel);
-//just for test, add some comments to database
-            FirebaseUtility.addRates(activity,  itemModel);
-
-
-            itemModel = new RateModel("محمود", "mahmoud@gmail.com", "المطعم رقم 1", "رائع ");
-            itemModelList.add(itemModel);
-//just for test, add some comments to database
-            FirebaseUtility.addRates(activity,  itemModel);
-
-
-            MainCommentAdapter itemAdapter = new MainCommentAdapter(itemModelList, activity);
-            recycle.setAdapter(itemAdapter);
+//            List<RateModel> itemModelList = new ArrayList<>();
+//            RateModel itemModel = new RateModel("أحمد", "ahmed@gmail.com", "المطعم رقم 1", "جميل ولذيذ");
+//            itemModelList.add(itemModel);
+////just for test, add some comments to database
+//            FirebaseUtility.addRates(activity,  itemModel);
+//
+//            itemModel = new RateModel("محمد", "mohammed@gmail.com", "المطعم رقم 1", "جميل وطيب");
+//            itemModelList.add(itemModel);
+////just for test, add some comments to database
+//            FirebaseUtility.addRates(activity,  itemModel);
+//
+//
+//            itemModel = new RateModel("محمود", "mahmoud@gmail.com", "المطعم رقم 1", "رائع ");
+//            itemModelList.add(itemModel);
+////just for test, add some comments to database
+//            FirebaseUtility.addRates(activity,  itemModel);
+//
+//
+//            MainCommentAdapter itemAdapter = new MainCommentAdapter(itemModelList, activity);
+//            recycle.setAdapter(itemAdapter);
 
 
         }

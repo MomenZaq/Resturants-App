@@ -4,7 +4,10 @@ import androidx.fragment.app.Fragment;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.resturants.resturantsapp.R;
@@ -20,14 +23,20 @@ import java.util.List;
 
 public class ItemProfileActivity extends ParentActivity {
     public static final String EXTRA_SELECTED_ITEM_EXTRA = "selected_item";
+    private ImageView imgview;
+    private TextView txvName;
+
     ItemDetailsFragment itemDetailsFragment;
     ItemPublicRateFragment itemPublicRateFragment;
     ItemRateFragment itemRateFragment;
     ItemModel itemModel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item_profile);
+        imgview = (ImageView) findViewById(R.id.imgview);
+        txvName = (TextView) findViewById(R.id.txv_name);
 
         String videoObjectString = getIntent().getStringExtra(EXTRA_SELECTED_ITEM_EXTRA);
         Gson gson = new Gson();
@@ -35,6 +44,11 @@ public class ItemProfileActivity extends ParentActivity {
         }.getType();
         itemModel = gson.fromJson(videoObjectString, type2);
 
+        Glide.with(getApplicationContext()).
+                load(itemModel.getImgUrl())
+                .into(imgview);
+
+        txvName.setText(itemModel.getItemName());
         setTabs();
 
 
@@ -45,9 +59,9 @@ public class ItemProfileActivity extends ParentActivity {
         List<String> tabsList = new ArrayList<>();
         List<Fragment> fragmentList = new ArrayList<>();
 
-        itemDetailsFragment = new ItemDetailsFragment(this,itemModel);
-        itemRateFragment = new ItemRateFragment(this,itemModel);
-        itemPublicRateFragment = new ItemPublicRateFragment(this,itemModel);
+        itemDetailsFragment = new ItemDetailsFragment(this, itemModel);
+        itemRateFragment = new ItemRateFragment(this, itemModel);
+        itemPublicRateFragment = new ItemPublicRateFragment(this, itemModel);
 
         tabsList.add(0, getBaseContext().getResources().getString(R.string.details));
         fragmentList.add(0, itemDetailsFragment);

@@ -37,6 +37,12 @@ public class MainItemAdapter extends RecyclerView.Adapter<MainItemAdapter.OrderH
         this.activity = activity;
     }
 
+
+
+    public void setList(List<ItemModel> list) {
+        this.list = list;
+    }
+
     @NonNull
     @Override
     public OrderHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

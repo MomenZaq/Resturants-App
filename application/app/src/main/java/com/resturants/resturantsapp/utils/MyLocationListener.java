@@ -57,7 +57,7 @@ public class MyLocationListener implements LocationListener {
 
         } catch (Exception ex) {
 
-            Toast.makeText(ctx, "Exception " + ex, Toast.LENGTH_LONG).show();
+//            Toast.makeText(ctx, "Exception " + ex, Toast.LENGTH_LONG).show();
         }
     }
 

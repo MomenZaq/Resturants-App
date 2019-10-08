@@ -58,7 +58,7 @@ android:onClick="back"
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/edt_search_league"
+        android:id="@+id/edt_search"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_marginTop="16dp"
@@ -83,7 +83,7 @@ android:onClick="back"
         android:textColor="@color/colorFont"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edt_search_league" />
+        app:layout_constraintTop_toBottomOf="@+id/edt_search" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"

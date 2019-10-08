@@ -16,6 +16,8 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.Settings;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -50,7 +52,7 @@ public class ItemsActivity extends ParentActivity {
     private ImageView imgSetting;
     private ImageView imgLogout;
     private ImageView imgBack;
-    private AppCompatEditText edtSearchLeague;
+    private AppCompatEditText edtSearch;
     private TextView txvNear;
     private RecyclerView recycler;
     private ProgressBar progress;
@@ -67,7 +69,7 @@ public class ItemsActivity extends ParentActivity {
     String mLatitude = "";
     String mLongitude = "";
     List<ItemModel> itemModelList = new ArrayList<>();
-
+    MainItemAdapter itemAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,7 +81,7 @@ public class ItemsActivity extends ParentActivity {
         imgSetting = (ImageView) findViewById(R.id.img_setting);
         imgLogout = (ImageView) findViewById(R.id.img_logout);
         imgBack = (ImageView) findViewById(R.id.img_back);
-        edtSearchLeague = (AppCompatEditText) findViewById(R.id.edt_search_league);
+        edtSearch = (AppCompatEditText) findViewById(R.id.edt_search);
         txvNear = (TextView) findViewById(R.id.txv_near);
         recycler = (RecyclerView) findViewById(R.id.recycler);
         progress = (ProgressBar) findViewById(R.id.progress);
@@ -133,6 +135,43 @@ public class ItemsActivity extends ParentActivity {
             getData(selectedItem);
             txvNear.setText(getResources().getString(R.string.near_cofee));
         }
+
+
+        //here we set listener for search
+        edtSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                System.out.println(edtSearch.getText());
+                if (itemModelList == null || itemModelList.isEmpty()) {
+                    return;
+                }
+                if (edtSearch.getText().length() == 0) {
+                    setAdapter(itemModelList);
+
+                } else {
+                    ArrayList<ItemModel> list = new ArrayList<>();
+
+                    for (ItemModel object : itemModelList) {
+                        if (object.getItemName().contains(edtSearch.getText())) {
+                            list.add(object);
+                        }
+                    }
+                    setAdapter(list);
+                }
+            }
+        });
+
+
     }
 
     private void getData(String type) {
@@ -339,37 +378,43 @@ public class ItemsActivity extends ParentActivity {
                     int distance = (int) locationA.distanceTo(locationB);
 
 
-                    ItemModel itemModel = new ItemModel(name, distance, vicinity, Integer.parseInt(rate), openNow, imageUrl, new LatLng(lat, lng));
+                    ItemModel itemModel = new ItemModel(name, distance, vicinity, Integer.parseInt(rate), openNow, "-", imageUrl, new LatLng(lat, lng));
                     itemModelList.add(itemModel);
 
                 }
             }
 
-            setAdapter();
+            setAdapter(itemModelList);
         }
     }
 
 
-    private void setAdapter() {
+    private void setAdapter(List<ItemModel> itemModelList) {
 
         progress.setVisibility(View.GONE);
         //sort the items by distance.
         if (itemModelList.isEmpty()) {
             txvNoData.setVisibility(View.VISIBLE);
         } else {
+            txvNoData.setVisibility(View.GONE);
             Collections.sort(itemModelList, new Comparator<ItemModel>() {
                 @Override
                 public int compare(ItemModel o1, ItemModel o2) {
                     return o1.getItemDistance() - o2.getItemDistance();
                 }
             });
-            MainItemAdapter itemAdapter = new MainItemAdapter(itemModelList, this);
-            recycler.setAdapter(itemAdapter);
-
-
-            txvNoData.setVisibility(View.GONE);
-
         }
+        if (itemAdapter == null) {
+//                  create new instance
+            itemAdapter = new MainItemAdapter(itemModelList, this);
+            recycler.setAdapter(itemAdapter);
+        } else {
+//                  just update
+            itemAdapter.setList(itemModelList);
+            itemAdapter.notifyDataSetChanged();
+        }
+
+
 
     }
 

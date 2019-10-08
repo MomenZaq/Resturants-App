@@ -81,20 +81,21 @@ public class ItemPublicRateFragment extends Fragment {
             tags = (TagContainerLayout) v.findViewById(R.id.tags);
 
 
+            txvRate.setText(itemModel.getRating()+"/5");
             rate.setRating(itemModel.getRating());
 
             int posRate = itemModel.getRating() * 20;
             int negRate = 100 - posRate;
-            txvPos.setText(posRate + "");
-            txvNeg.setText(negRate + "");
+            txvPos.setText(posRate + " %");
+            txvNeg.setText(negRate + " %");
 
 
             //set comments tags
             List<String> userWin = new ArrayList<>();
             //just for test
-            userWin.add("     جميل     ");
-            userWin.add("  رائع   ");
-            userWin.add(" لذيذ ");
+//            userWin.add("     جميل     ");
+//            userWin.add("  رائع   ");
+//            userWin.add(" لذيذ ");
             tags.setBackgroundColor(Color.TRANSPARENT);
             tags.setTagBackgroundColor(activity.getResources().getColor(R.color.colorAccent));
             tags.setTagBorderColor(activity.getResources().getColor(R.color.colorAccent));

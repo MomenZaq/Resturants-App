@@ -17,8 +17,8 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/imgview"
-            android:background="@drawable/bck_restaurants" />
+            android:scaleType="centerCrop"
+            android:id="@+id/imgview" />
 
         <View
             android:layout_width="match_parent"
@@ -29,10 +29,10 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:gravity="start"
+            android:id="@+id/txv_name"
+            android:layout_gravity="bottom|start"
             android:padding="16dp"
-            android:text="@string/restaurants"
+            android:textAlignment="viewStart"
             android:textAppearance="@style/fontBold"
             android:textColor="@color/colorWhite"
             android:textSize="17sp" />

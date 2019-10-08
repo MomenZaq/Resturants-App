@@ -9,19 +9,20 @@ public class ItemModel {
     int rating;
     String opening_hours;
     String phone;
+    String imgUrl;
     LatLng latLng;
 
 
-    public ItemModel(String itemName, int itemDistance, String itemArea, int rating, String opening_hours, String phone, LatLng latLng) {
+    public ItemModel(String itemName, int itemDistance, String itemArea, int rating, String opening_hours, String phone, String imgUrl, LatLng latLng) {
         this.itemName = itemName;
         this.itemDistance = itemDistance;
         this.itemArea = itemArea;
         this.rating = rating;
         this.opening_hours = opening_hours;
         this.phone = phone;
+        this.imgUrl = imgUrl;
         this.latLng = latLng;
     }
-
 
     public int getRating() {
         return rating;
@@ -70,6 +71,14 @@ public class ItemModel {
 
     public void setItemArea(String itemArea) {
         this.itemArea = itemArea;
+    }
+
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
     }
 
     public LatLng getLatLng() {
