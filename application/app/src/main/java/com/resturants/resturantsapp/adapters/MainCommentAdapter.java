@@ -26,6 +26,10 @@ public class MainCommentAdapter extends RecyclerView.Adapter<MainCommentAdapter.
         this.activity = activity;
     }
 
+    public void setList(List<RateModel> list) {
+        this.list = list;
+    }
+
     @NonNull
     @Override
     public OrderHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

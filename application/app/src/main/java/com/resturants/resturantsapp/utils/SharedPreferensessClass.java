@@ -27,7 +27,7 @@ public class SharedPreferensessClass {
 
     public static void init(Context context) {
         if (sharedPreferences == null) {
-            sharedPreferences = context.getSharedPreferences("yallaShoot", Context.MODE_PRIVATE);
+            sharedPreferences = context.getSharedPreferences("SharedFileName", Context.MODE_PRIVATE);
         }
 
         if (editor == null) {
@@ -69,7 +69,6 @@ public class SharedPreferensessClass {
     }
 
 
-
     public int getUserId() {
 
         return sharedPreferences.getInt("UserId", 0);
@@ -80,7 +79,6 @@ public class SharedPreferensessClass {
         editor.putInt("UserId", userId);
         editor.commit();
     }
-
 
 
     public int getSearchDistance() {
@@ -103,4 +101,15 @@ public class SharedPreferensessClass {
     }
 
 
+    public boolean getRateItemName(String itemName) {
+// if returned true: user already has a comment.
+// if returned false: user doesn't have a comment; he can comment
+        return sharedPreferences.getBoolean(itemName, false);
+    }
+
+    public void setRateItemName(String itemName) {
+
+        editor.putBoolean(itemName, true);
+        editor.commit();
+    }
 }

@@ -4,12 +4,18 @@ import android.content.Context;
 
 import androidx.annotation.Nullable;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.resturants.resturantsapp.model.RateModel;
+import com.resturants.resturantsapp.utils.GetAllRatesInterface;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class FirebaseUtility {
 
@@ -20,10 +26,11 @@ public class FirebaseUtility {
         return FirebaseDatabase.getInstance().getReference().child(RATES);
     }
 
-    public static void getRates(final Context context, String itemName) {
+    public static void getRates(final Context context, String itemName, GetAllRatesInterface getAllRatesInterface) {
+        List<RateModel> rateModels = new ArrayList<>();
         try {
 
-            final DatabaseReference mDatabase =getDatabaseReference().child(itemName + "");
+            final DatabaseReference mDatabase = getDatabaseReference().child(itemName + "");
             mDatabase.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@Nullable DataSnapshot dataSnapshot1) {
@@ -37,7 +44,7 @@ public class FirebaseUtility {
                             try {
 //get RateModel object
                                 RateModel rateModel = dataSnapshot.getValue(RateModel.class);
-
+                                rateModels.add(rateModel);
 
                             } catch (Exception e) {
 //                                Toast.makeText(context, context.getResources().getString(R.string.error_please_try_again), Toast.LENGTH_SHORT).show();
@@ -46,7 +53,8 @@ public class FirebaseUtility {
 
 
                         }
-
+                        //return the list of rates by the interface
+                        getAllRatesInterface.finish(rateModels);
 
                     } catch (Exception e) {
                         System.out.println("ERRORNOWC: " + e.getMessage());
@@ -66,7 +74,7 @@ public class FirebaseUtility {
         }
     }
 
-    public static void addRates(Context context, RateModel rateModel) {
+    public static void addRates(Context context, RateModel rateModel, OnSuccessListener<? super Void> successListener, OnFailureListener failureListener) {
         try {
 
             // set the path of database, databaseName > itemName > userEmail ; it should be unique.
@@ -77,13 +85,11 @@ public class FirebaseUtility {
 
 
             mDatabase.setValue(rateModel).
-                    addOnSuccessListener(aVoid ->
-                            System.out.println("THESUBSCRIPTION2: done")).
-                    addOnFailureListener(e ->
-                            System.out.println("THESUBSCRIPTION2 " + e.getMessage()));
+                    addOnSuccessListener(successListener).
+                    addOnFailureListener(failureListener);
 
         } catch (Exception e) {
-            System.out.println("ERRORINFIREBASESETTING8: " + e.getMessage());
+            System.out.println("Add Rate8: " + e.getMessage());
         }
 
     }

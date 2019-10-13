@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityOptionsCompat;
 
@@ -46,7 +47,22 @@ public abstract class ParentActivity extends AppCompatActivity {
     }
 
     public void logout() {
-        SharedPreferensessClass.getInstance(getBaseContext()).signOut();
-        Toast.makeText(this, getResources().getString(R.string.logout_done), Toast.LENGTH_SHORT).show();
+        if (!SharedPreferensessClass.getInstance(getBaseContext()).getUserEmail().equals("")) {
+            final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle(getResources().getString(R.string.log_out));
+            builder.setMessage(getResources().getString(R.string.are_you_sure_you_want_to_log_out));
+            builder.setPositiveButton(getResources().getString(R.string.yes), (dialogInterface, i) -> {
+
+                SharedPreferensessClass.getInstance(getBaseContext()).signOut();
+                Toast.makeText(this, getResources().getString(R.string.logout_done), Toast.LENGTH_SHORT).show();
+                dialogInterface.dismiss();
+            });
+
+            builder.setNegativeButton(getResources().getString(R.string.cancel), (dialogInterface, i) -> dialogInterface.dismiss());
+
+            builder.show();
+
+
+        }
     }
 }

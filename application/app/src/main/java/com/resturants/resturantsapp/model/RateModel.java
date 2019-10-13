@@ -6,6 +6,8 @@ public class RateModel {
     String itemName;
     String comment;
 
+    public RateModel() {
+    }
 
     public RateModel(String userName, String userEmail, String itemName, String comment) {
         this.userName = userName;

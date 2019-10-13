@@ -28,8 +28,8 @@ public class AppMain extends Application {
 
         try {
 
-// Enable Firebase Database Cache
-            FirebaseDatabase.getInstance().setPersistenceEnabled(true);
+// disable Firebase Database Cache
+            FirebaseDatabase.getInstance().setPersistenceEnabled(false);
         } catch (Exception ignored) {
         }
 
