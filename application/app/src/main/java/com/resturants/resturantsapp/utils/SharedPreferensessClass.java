@@ -68,6 +68,17 @@ public class SharedPreferensessClass {
         editor.commit();
     }
 
+    public String getUserPass() {
+
+        return sharedPreferences.getString("UserPass", "");
+    }
+
+    public void setUserPass(String userEmail) {
+
+        editor.putString("UserPass", userEmail);
+        editor.commit();
+    }
+
 
     public int getUserId() {
 
@@ -110,6 +121,18 @@ public class SharedPreferensessClass {
     public void setRateItemName(String itemName) {
 
         editor.putBoolean(itemName, true);
+        editor.commit();
+    }
+
+    public boolean getBtnRateItemName(String itemName) {
+// if returned true: user already has a comment.
+// if returned false: user doesn't have a comment; he can comment
+        return sharedPreferences.getBoolean("btn_"+itemName, false);
+    }
+
+    public void setBtnRateItemName(String itemName) {
+
+        editor.putBoolean("btn_"+itemName, true);
         editor.commit();
     }
 }

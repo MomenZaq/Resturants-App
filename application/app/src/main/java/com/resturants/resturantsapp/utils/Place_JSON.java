@@ -15,6 +15,7 @@ import java.util.List;
 public class Place_JSON {
 
 
+    public static String PLACE_ID_KEY="place_id";
     public static String PLACE_NAME_KEY="place_name";
     public static String VICINITY_KEY="vicinity";
     public static String LAT_KEY="lat";
@@ -68,6 +69,7 @@ public class Place_JSON {
 
         System.out.println("THEJSONDATA: " + jPlace);
         HashMap<String, String> place = new HashMap<String, String>();
+        String placeId = "-NA-";
         String placeName = "-NA-";
         String vicinity = "-NA-";
         String latitude = "";
@@ -78,6 +80,10 @@ public class Place_JSON {
         String imgUrl = null;
         try {
             // Extracting Place name, if available
+            if (!jPlace.isNull("id")) {
+                placeId = jPlace.getString("place_id");
+            }
+        // Extracting Place name, if available
             if (!jPlace.isNull("name")) {
                 placeName = jPlace.getString("name");
             }
@@ -113,6 +119,7 @@ public class Place_JSON {
 
 
 
+            place.put(PLACE_ID_KEY, placeId);
             place.put(PLACE_NAME_KEY, placeName);
             place.put(VICINITY_KEY, vicinity);
             place.put(LAT_KEY, latitude);

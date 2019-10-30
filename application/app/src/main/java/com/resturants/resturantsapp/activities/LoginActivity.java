@@ -215,7 +215,7 @@ public class LoginActivity extends ParentActivity {
     }
 
 
-    private void updateUI(String email, String name) {
+    private void updateUI(String email, String name, String password) {
         System.out.println("THEACCOUNT: " + name);
         System.out.println("THEACCOUNT2: " + email);
         if (name == null) {
@@ -223,7 +223,7 @@ public class LoginActivity extends ParentActivity {
         }
         SharedPreferensessClass.getInstance(this).setUserName(name);
         SharedPreferensessClass.getInstance(this).setUserEmail(email);
-
+        SharedPreferensessClass.getInstance(this).setUserPass(password);
 
         Toast.makeText(this, getString(R.string.successfully_sign_in), Toast.LENGTH_SHORT).show();
         btnSkip.callOnClick();
@@ -258,7 +258,7 @@ public class LoginActivity extends ParentActivity {
                         // Sign in success, update UI with the signed-in user's information
                         Log.d(TAG, "signInWithEmail:success");
                         FirebaseUser user = mAuth.getCurrentUser();
-                        updateUI(email, user.getDisplayName());
+                        updateUI(email, user.getDisplayName(), password);
                     } else {
                         hideProcess();
                         try {
@@ -319,7 +319,7 @@ public class LoginActivity extends ParentActivity {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "createUserWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
-                            updateUI(email, name);
+                            updateUI(email, name, password);
                         } else {
                             hideProcess();
                             try {

@@ -9,6 +9,7 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
@@ -46,6 +47,12 @@ public class ItemRateFragment extends Fragment {
     private TextView txvNoData;
     private EditText edtContent;
     private ImageButton btnSend;
+    private Button btnComment1;
+    private Button btnComment2;
+    private Button btnComment3;
+    private Button btnComment4;
+
+
     private RecyclerView recycle;
     private ProgressBar progress;
 
@@ -100,7 +107,10 @@ public class ItemRateFragment extends Fragment {
             btnSend = (ImageButton) v.findViewById(R.id.btn_send);
             recycle = (RecyclerView) v.findViewById(R.id.recycle);
             progress = (ProgressBar) v.findViewById(R.id.progress);
-
+            btnComment1 = (Button) v.findViewById(R.id.btn_comment_1);
+            btnComment2 = (Button) v.findViewById(R.id.btn_comment_2);
+            btnComment3 = (Button) v.findViewById(R.id.btn_comment_3);
+            btnComment4 = (Button) v.findViewById(R.id.btn_comment_4);
 
 //set vertical layout manager for recyclerView
             LinearLayoutManager layoutManager = new LinearLayoutManager(activity);
@@ -126,7 +136,77 @@ public class ItemRateFragment extends Fragment {
                 }
             });
 
+
+            btnComment1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    addBtnRate(1);
+                }
+            });
+            btnComment2.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    addBtnRate(2);
+                }
+            });
+            btnComment3.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    addBtnRate(3);
+                }
+            });
+            btnComment4.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    addBtnRate(4);
+                }
+            });
         }
+    }
+
+    private void addBtnRate(int btnNum) {
+
+        String userName = SharedPreferensessClass.getInstance(activity).getUserName();
+        String userEmail = SharedPreferensessClass.getInstance(activity).getUserEmail();
+        String comment = "";
+        switch (btnNum) {
+            case 1:
+                comment = btnComment1.getText().toString();
+                break;
+            case 2:
+                comment = btnComment2.getText().toString();
+                break;
+            case 3:
+                comment = btnComment3.getText().toString();
+                break;
+            case 4:
+                comment = btnComment4.getText().toString();
+                break;
+        }
+        //check if the user didn't sign in, go to login activity
+
+        if (!checkLogin(userEmail)) {
+            return;
+        }
+
+
+        RateModel rateModel = new RateModel(userName, userEmail, itemModel.getItemName(), comment);
+        FirebaseUtility.addBtnRates(activity, rateModel, new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        System.out.println("Add Btn Rate: done");
+                        //save the itemName to prevent comment another time
+                        SharedPreferensessClass.getInstance(activity).setBtnRateItemName(rateModel.getItemName());
+
+                    }
+                },
+                new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        System.out.println("Add Btn Rate " + e.getMessage());
+                    }
+                });
+
     }
 
     private void setAdapter() {
@@ -158,25 +238,8 @@ public class ItemRateFragment extends Fragment {
         String userEmail = SharedPreferensessClass.getInstance(activity).getUserEmail();
         String comment = edtContent.getText().toString();
         //check if the user didn't sign in, go to login activity
-        if (userEmail.equals("")) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-            builder.setTitle(activity.getResources().getString(R.string.add_new_comment));
-            builder.setMessage(activity.getResources().getString(R.string.sorry_you_have_to_sign_in_to_comment));
-            builder.setNegativeButton(activity.getResources().getString(R.string.cancel), (dialogInterface, i) -> dialogInterface.dismiss());
 
-            builder.setPositiveButton(activity.getResources().getString(R.string.login), (dialogInterface, i) -> {
-                Intent intent = new Intent(activity, LoginActivity.class);
-                Bundle bundle = ActivityOptionsCompat.makeCustomAnimation(activity,
-                        android.R.anim.fade_in, android.R.anim.fade_out).toBundle();
-                startActivity(intent, bundle);
-            });
-
-//                builder.show();
-            AlertDialog dialog = builder.create();
-            dialog.show();
-            TextView textView = dialog.findViewById(android.R.id.message);
-            textView.setLineSpacing(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 6f, activity.getResources().getDisplayMetrics()), 1.0f);
-
+        if (!checkLogin(userEmail)) {
             return;
         }
         //check if comment less than 4 letters.
@@ -209,6 +272,31 @@ public class ItemRateFragment extends Fragment {
                 });
 
 
+    }
+
+    private boolean checkLogin(String userEmail) {
+        if (userEmail.equals("")) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+            builder.setTitle(activity.getResources().getString(R.string.add_new_comment));
+            builder.setMessage(activity.getResources().getString(R.string.sorry_you_have_to_sign_in_to_comment));
+            builder.setNegativeButton(activity.getResources().getString(R.string.cancel), (dialogInterface, i) -> dialogInterface.dismiss());
+
+            builder.setPositiveButton(activity.getResources().getString(R.string.login), (dialogInterface, i) -> {
+                Intent intent = new Intent(activity, LoginActivity.class);
+                Bundle bundle = ActivityOptionsCompat.makeCustomAnimation(activity,
+                        android.R.anim.fade_in, android.R.anim.fade_out).toBundle();
+                startActivity(intent, bundle);
+            });
+
+//                builder.show();
+            AlertDialog dialog = builder.create();
+            dialog.show();
+            TextView textView = dialog.findViewById(android.R.id.message);
+            textView.setLineSpacing(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 6f, activity.getResources().getDisplayMetrics()), 1.0f);
+
+            return false;
+        }
+        return true;
     }
 
 

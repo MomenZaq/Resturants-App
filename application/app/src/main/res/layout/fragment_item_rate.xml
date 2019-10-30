@@ -10,13 +10,81 @@
     android:padding="16dp">
 
 
+    <LinearLayout
+        android:id="@+id/linear_buttons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="25dp"
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="parent">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="10">
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/btn_comment_1"
+                android:textSize="15sp"
+                android:layout_weight="4"
+                android:text="نظيف" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="2"></View>
+
+            <Button
+                android:textSize="15sp"
+                android:layout_width="0dp"
+                android:id="@+id/btn_comment_2"
+                android:layout_height="wrap_content"
+                android:layout_weight="4"
+                android:text="رائع" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:orientation="horizontal"
+            android:weightSum="10">
+
+            <Button
+                android:id="@+id/btn_comment_3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textSize="15sp"
+                android:layout_weight="4"
+                android:text="ممتاز" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="2"></View>
+
+            <Button
+                android:layout_width="0dp"
+                android:id="@+id/btn_comment_4"
+                android:layout_height="wrap_content"
+                android:layout_weight="4"
+                android:textSize="15sp"
+                android:text="عادي" />
+        </LinearLayout>
+
+
+    </LinearLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/linearLayout7"
+        android:layout_marginTop="8dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/linear_buttons">
 
         <EditText
             android:id="@+id/edt_content"
@@ -29,9 +97,9 @@
             android:textColor="@color/colorFont"
             android:textSize="16sp"
             app:layout_constraintEnd_toStartOf="@id/btn_send"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintTop_toTopOf="parent" />
 
 
         <ImageButton
@@ -53,10 +121,9 @@
         android:layout_marginTop="22sp"
         android:alpha="1"
         android:visibility="visible"
-        tools:listitem="@layout/row_comment"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout7"
- />
+        tools:listitem="@layout/row_comment" />
 
     <ProgressBar
         android:id="@+id/progress"
@@ -73,12 +140,12 @@
         android:id="@+id/txv_no_data"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="gone"
         android:layout_marginStart="16dp"
         android:text="@string/no_data"
         android:textAppearance="@style/fontLight"
         android:textColor="@color/colorFont"
         android:textSize="14sp"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

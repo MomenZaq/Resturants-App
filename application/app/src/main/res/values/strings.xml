@@ -61,5 +61,6 @@
     <string name="are_you_sure_you_want_to_log_out">هل تريد تسجيل الخروج؟</string>
     <string name="yes">نعم</string>
     <string name="you_already_commented">لقد أضفت تعليقاً, لا يمكنك إضافة تعليق آخر.</string>
+    <string name="successfully_update_user_data">تم تغيير بيانات المستخدم بنجاح!</string>
 
 </resources>

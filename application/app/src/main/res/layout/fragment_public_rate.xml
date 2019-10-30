@@ -1,101 +1,104 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="@color/colorBackground"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:background="@color/colorBackground">
 
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:padding="16dp"
-    android:orientation="vertical">
-
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-    <TextView
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/avg_rate"
-        android:textAppearance="@style/fontLight"
-        android:textColor="@color/colorFont2"
-        android:textSize="16sp"></TextView>
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/avg_rate"
+                android:textAppearance="@style/fontLight"
+                android:textColor="@color/colorFont2"
+                android:textSize="16sp"></TextView>
 
 
-        <TextView
+            <TextView
+                android:id="@+id/txv_rate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="6"
+                android:textAppearance="@style/fontBold"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="35sp" />
+        </RelativeLayout>
+
+
+        <RatingBar
+            android:id="@+id/rate"
+            style="?android:attr/ratingBarStyleSmall"
             android:layout_width="wrap_content"
-            android:id="@+id/txv_rate"
-            android:text="6"
-            android:textSize="35sp"
-            android:textColor="@color/colorPrimaryDark"
-            android:textAppearance="@style/fontBold"
-            android:layout_centerHorizontal="true"
-            android:layout_height="wrap_content" />
-    </RelativeLayout>
-
-
-
-
-    <RatingBar
-        android:id="@+id/rate"
-        style="?android:attr/ratingBarStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:numStars="5"
-        android:rating="4"
-        android:layout_marginTop="26dp"
-        android:layout_gravity="center_horizontal"
-    />
-
-
-
-        <TextView
-            android:layout_width="80dp"
-            android:text="30%"
-            android:gravity="center"
-            android:id="@+id/txv_neg"
-            android:textSize="16sp"
-            android:padding="5dp"
-            android:background="@color/red"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
             android:layout_marginTop="26dp"
-            android:layout_gravity="center_horizontal"
-            android:textColor="@color/colorWhite"
-            android:textAppearance="@style/fontBold"
-            android:layout_height="wrap_content" />
+            android:numStars="5"
+            android:rating="4" />
+
 
         <TextView
-            android:layout_width="80dp"
-            android:id="@+id/txv_pos"
-            android:text="70%"
-            android:gravity="center"
-            android:textSize="16sp"
-            android:padding="5dp"
-            android:background="@color/green"
-            android:layout_marginTop="8dp"
+            android:id="@+id/txv_neg"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:textColor="@color/colorWhite"
+            android:layout_marginTop="26dp"
+            android:background="@color/red"
+            android:drawableEnd="@drawable/ic_dislike"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="0%"
             android:textAppearance="@style/fontBold"
-            android:layout_height="wrap_content" />
+            android:textColor="@color/colorWhite"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/txv_pos"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="8dp"
+            android:background="@color/green"
+            android:drawableEnd="@drawable/ic_like"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="0%"
+            android:textAppearance="@style/fontBold"
+            android:textColor="@color/colorWhite"
+            android:textSize="16sp" />
 
 
+        <co.lujun.myandroidtagview2.TagContainerLayout
+            android:id="@+id/tags"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@color/colorFont2"
+            android:padding="10dp"
+            android:visibility="gone"
+            app:container_enable_drag="false"
+            app:horizontal_interval="10dp"
+            app:tag_clickable="false"
+            app:tag_theme="none"
+            app:vertical_interval="10dp" />
 
-    <co.lujun.myandroidtagview2.TagContainerLayout
-        android:id="@+id/tags"
-        android:layout_width="match_parent"
-        android:layout_marginTop="20dp"
-        android:layout_height="wrap_content"
-        android:background="@color/colorFont2"
-        android:padding="10dp"
-        app:container_enable_drag="false"
-        app:horizontal_interval="10dp"
-        app:tag_clickable="false"
-        app:tag_theme="none"
-        app:vertical_interval="10dp" />
+        <net.alhazmy13.wordcloud.WordCloudView
+            android:id="@+id/wordCloud"
+            android:background="@color/gray"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp" />
 
-
-</LinearLayout>
+    </LinearLayout>
 </ScrollView>

@@ -29,6 +29,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.resturants.resturantsapp.R;
 import com.resturants.resturantsapp.adapters.MainItemAdapter;
 import com.resturants.resturantsapp.model.ItemModel;
+import com.resturants.resturantsapp.network.NetworkUtil;
 import com.resturants.resturantsapp.utils.MyLocationListener;
 import com.resturants.resturantsapp.utils.Place_JSON;
 import com.resturants.resturantsapp.utils.SharedPreferensessClass;
@@ -193,7 +194,60 @@ public class ItemsActivity extends ParentActivity {
             mLatitude = latLng.latitude + "";
             mLongitude = latLng.longitude + "";
             StringBuilder sbValue = new StringBuilder(getAPILike(mLatitude, mLongitude, type));
-            PlacesTask placesTask = new PlacesTask();
+            NetworkUtil.PlacesTask placesTask = new NetworkUtil.PlacesTask(getBaseContext(),true, new NetworkUtil.onFinishedConnection() {
+                @Override
+                public void onFinished(List<HashMap<String, String>> list) {
+
+                    if (!list.isEmpty()) {
+                        Log.d("Map", "list size: " + list.size());
+                        for (int i = 0; i < list.size(); i++) {
+
+
+                            HashMap<String, String> hmPlace = list.get(i);
+
+                            // Getting latitude of the place
+                            double lat = Double.parseDouble(hmPlace.get(Place_JSON.LAT_KEY));
+                            // Getting longitude of the place
+                            double lng = Double.parseDouble(hmPlace.get(Place_JSON.LNG_KEY));
+                            // Getting id
+                            String id = hmPlace.get(Place_JSON.PLACE_ID_KEY);
+                            // Getting name
+                            String name = hmPlace.get(Place_JSON.PLACE_NAME_KEY);
+                            // Getting vicinity
+                            String vicinity = hmPlace.get(Place_JSON.VICINITY_KEY);
+                            // Getting Rate
+                            String rate = hmPlace.get(Place_JSON.RATE_KEY);
+                            // Getting Image
+                            String imageUrl = hmPlace.get(Place_JSON.IMAGE_KEY);
+                            // Getting OpenNow?
+                            String openNow = hmPlace.get(Place_JSON.OPENING_KEY);
+
+                            Log.d("Map", "place: " + name);
+
+
+                            Location locationA = new Location("point A");
+                            locationA.setLatitude(Double.parseDouble(mLatitude));
+                            locationA.setLongitude(Double.parseDouble(mLongitude));
+                            Location locationB = new Location("point B");
+                            locationB.setLatitude(lat);
+                            locationB.setLongitude(lng);
+                            int distance = (int) locationA.distanceTo(locationB);
+
+
+                            ItemModel itemModel = new ItemModel(id,name, distance, vicinity, Integer.parseInt(rate), openNow, "-", imageUrl, new LatLng(lat, lng));
+                            itemModelList.add(itemModel);
+
+                        }
+                    }
+
+                    setAdapter(itemModelList);
+                }
+
+                @Override
+                public void onFinished(String response) {
+
+                }
+            });
             placesTask.execute(sbValue.toString());
         }
     }
@@ -250,144 +304,6 @@ public class ItemsActivity extends ParentActivity {
         return sb;
     }
 
-    private class PlacesTask extends AsyncTask<String, Integer, String> {
-
-        String data = null;
-
-        // Invoked by execute() method of this object
-        @Override
-        protected String doInBackground(String... url) {
-            try {
-                data = downloadUrl(url[0]);
-            } catch (Exception e) {
-                Log.d("Background Task", e.toString());
-            }
-            return data;
-        }
-
-        // Executed after the complete execution of doInBackground() method
-        @Override
-        protected void onPostExecute(String result) {
-            ParserTask parserTask = new ParserTask();
-
-            // Start parsing the Google places in JSON format
-            // Invokes the "doInBackground()" method of the class ParserTask
-            parserTask.execute(result);
-        }
-    }
-
-
-    private String downloadUrl(String strUrl) throws IOException {
-        String data = "";
-        InputStream iStream = null;
-        HttpURLConnection urlConnection = null;
-        try {
-            URL url = new URL(strUrl);
-
-            // Creating an http connection to communicate with url
-            urlConnection = (HttpURLConnection) url.openConnection();
-
-            // Connecting to url
-            urlConnection.connect();
-
-            // Reading data from url
-            iStream = urlConnection.getInputStream();
-
-            BufferedReader br = new BufferedReader(new InputStreamReader(iStream));
-
-            StringBuffer sb = new StringBuffer();
-
-            String line = "";
-            while ((line = br.readLine()) != null) {
-                sb.append(line);
-
-            }
-
-            data = sb.toString();
-
-            System.out.println("THERESPONSE: " + data);
-            br.close();
-
-        } catch (Exception e) {
-            Log.d("Exception", e.toString());
-        } finally {
-            iStream.close();
-            urlConnection.disconnect();
-        }
-        return data;
-    }
-
-    private class ParserTask extends AsyncTask<String, Integer, List<HashMap<String, String>>> {
-
-        JSONObject jObject;
-
-        // Invoked by execute() method of this object
-        @Override
-        protected List<HashMap<String, String>> doInBackground(String... jsonData) {
-
-            List<HashMap<String, String>> places = null;
-            Place_JSON placeJson = new Place_JSON();
-
-            try {
-                jObject = new JSONObject(jsonData[0]);
-
-                places = placeJson.parse(jObject, getBaseContext());
-
-            } catch (Exception e) {
-                Log.d("Exception", e.toString());
-            }
-            return places;
-        }
-
-        // Executed after the complete execution of doInBackground() method
-        @Override
-        protected void onPostExecute(List<HashMap<String, String>> list) {
-
-            Log.d("Map", "list size: " + list.size());
-
-            if (!list.isEmpty()) {
-                for (int i = 0; i < list.size(); i++) {
-
-
-                    HashMap<String, String> hmPlace = list.get(i);
-
-                    // Getting latitude of the place
-                    double lat = Double.parseDouble(hmPlace.get(Place_JSON.LAT_KEY));
-                    // Getting longitude of the place
-                    double lng = Double.parseDouble(hmPlace.get(Place_JSON.LNG_KEY));
-                    // Getting name
-                    String name = hmPlace.get(Place_JSON.PLACE_NAME_KEY);
-                    // Getting vicinity
-                    String vicinity = hmPlace.get(Place_JSON.VICINITY_KEY);
-                    // Getting Rate
-                    String rate = hmPlace.get(Place_JSON.RATE_KEY);
-                    // Getting Image
-                    String imageUrl = hmPlace.get(Place_JSON.IMAGE_KEY);
-                    // Getting OpenNow?
-                    String openNow = hmPlace.get(Place_JSON.OPENING_KEY);
-
-                    Log.d("Map", "place: " + name);
-
-
-                    Location locationA = new Location("point A");
-                    locationA.setLatitude(Double.parseDouble(mLatitude));
-                    locationA.setLongitude(Double.parseDouble(mLongitude));
-                    Location locationB = new Location("point B");
-                    locationB.setLatitude(lat);
-                    locationB.setLongitude(lng);
-                    int distance = (int) locationA.distanceTo(locationB);
-
-
-                    ItemModel itemModel = new ItemModel(name, distance, vicinity, Integer.parseInt(rate), openNow, "-", imageUrl, new LatLng(lat, lng));
-                    itemModelList.add(itemModel);
-
-                }
-            }
-
-            setAdapter(itemModelList);
-        }
-    }
-
 
     private void setAdapter(List<ItemModel> itemModelList) {
 
@@ -413,7 +329,6 @@ public class ItemsActivity extends ParentActivity {
             itemAdapter.setList(itemModelList);
             itemAdapter.notifyDataSetChanged();
         }
-
 
 
     }

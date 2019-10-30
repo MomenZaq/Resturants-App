@@ -3,6 +3,7 @@ package com.resturants.resturantsapp.model;
 import com.google.android.gms.maps.model.LatLng;
 
 public class ItemModel {
+    String itemId;
     String itemName;
     int itemDistance;
     String itemArea;
@@ -13,7 +14,8 @@ public class ItemModel {
     LatLng latLng;
 
 
-    public ItemModel(String itemName, int itemDistance, String itemArea, int rating, String opening_hours, String phone, String imgUrl, LatLng latLng) {
+    public ItemModel(String itemId,String itemName, int itemDistance, String itemArea, int rating, String opening_hours, String phone, String imgUrl, LatLng latLng) {
+        this.itemId = itemId;
         this.itemName = itemName;
         this.itemDistance = itemDistance;
         this.itemArea = itemArea;
@@ -22,6 +24,14 @@ public class ItemModel {
         this.phone = phone;
         this.imgUrl = imgUrl;
         this.latLng = latLng;
+    }
+
+    public String getItemId() {
+        return itemId;
+    }
+
+    public void setItemId(String itemId) {
+        this.itemId = itemId;
     }
 
     public int getRating() {
