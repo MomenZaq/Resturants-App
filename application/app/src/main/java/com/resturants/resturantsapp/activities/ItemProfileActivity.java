@@ -26,9 +26,9 @@ public class ItemProfileActivity extends ParentActivity {
     private ImageView imgview;
     private TextView txvName;
 
-    ItemDetailsFragment itemDetailsFragment;
-    ItemPublicRateFragment itemPublicRateFragment;
-    ItemRateFragment itemRateFragment;
+    public  ItemDetailsFragment itemDetailsFragment;
+    public   ItemPublicRateFragment itemPublicRateFragment;
+    public   ItemRateFragment itemRateFragment;
     ItemModel itemModel;
 
     @Override

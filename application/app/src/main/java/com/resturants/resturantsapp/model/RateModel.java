@@ -9,6 +9,15 @@ public class RateModel {
     public RateModel() {
     }
 
+    public RateModel(String comment) {
+        this.comment = comment;
+    }
+
+    public RateModel(String userName, String comment) {
+        this.userName = userName;
+        this.comment = comment;
+    }
+
     public RateModel(String userName, String userEmail, String itemName, String comment) {
         this.userName = userName;
         this.userEmail = userEmail;

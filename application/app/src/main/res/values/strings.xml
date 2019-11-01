@@ -53,7 +53,7 @@
     <string name="near_restaurant_coffee">المطعم والمقهى الأقرب لك</string>
     <string name="near_cofee">المقهى الأقرب لك</string>
     <string name="open_now">فاتح الآن</string>
-    <string name="add_comment_more_than_4">أدخل تعليق أكبر من أربع حروف</string>
+    <string name="add_comment_more_than_3">أدخل تعليق أكبر من ثلاث حروف</string>
 
     <string name="add_new_comment">إضافة تعليق جديد</string>
     <string name="sorry_you_have_to_sign_in_to_comment">عزيزي المستخدم يجب عليك تسجيل الدخول لكي تتمكن من إضافة تعليق.</string>

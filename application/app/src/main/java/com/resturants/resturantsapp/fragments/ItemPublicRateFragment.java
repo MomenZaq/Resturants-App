@@ -47,6 +47,8 @@ public class ItemPublicRateFragment extends Fragment {
     private TagContainerLayout tags;
     private WordCloudView wordCloud;
 
+    public int minWordCloudScale = 25;
+    public int maxWordCloudScale = 70;
 
     public ItemPublicRateFragment() {
     }
@@ -118,145 +120,71 @@ public class ItemPublicRateFragment extends Fragment {
 
             //get btn rates from firebase
 
-            setReviews();
-            setWordCloud();
         }
     }
 
-    private void setReviews() {
-//get review from google api
-        String link = getAPILike().toString();
-        System.out.println("THE PLACE LINK: " + link);
-        NetworkUtil.PlacesTask placesTask = new NetworkUtil.PlacesTask(activity, false, new NetworkUtil.onFinishedConnection() {
-            @Override
-            public void onFinished(List<HashMap<String, String>> list) {
 
-            }
-
-            @Override
-            public void onFinished(String response) {
-                System.out.println("THE RESPONSE: " + response);
-
-                List<String> rates = getReviewsFromResult(response);
-                ;
-                int posRateNum = 0;
-                int negRateNum = 0;
-
-                for (String rate : rates) {
-                    //check if rate contain any positive rate
-                    for (String posRate : ConstantString.positiveList) {
-                        if (rate.contains(posRate)) {
-                            System.out.println("THE CURRENT POS: " + posRate);
-                            posRateNum++;
-                        }
-                    }
+    public void setStatisticsData(HashMap<String, Integer> hashMap, int posRateNum, int negRateNum) {
 
 
-                    //check if rate contain any negative rate
-                    for (String negRate : ConstantString.negativeList) {
-                        if (rate.contains(negRate)) {
-                            System.out.println("THE CURRENT NEG: " + negRate);
-                            negRateNum++;
-                        }
-                    }
+        //set Positive and Negative rate
+        int total = posRateNum + negRateNum;
+        int posRate = 0;
+        int negRate = 0;
 
-
-                }
-
-
-                int total = posRateNum + negRateNum;
-                int posRate = 0;
-                int negRate = 0;
-
-                if (posRateNum > 0) {
-                    posRate = (posRateNum / total) * 100;
-                }
-                if (negRateNum > 0) {
-                    negRate = (negRateNum / total) * 100;
-                }
-                txvPos.setText(posRate + " %");
-                txvNeg.setText(negRate + " %");
-            }
-        });
-        placesTask.execute(link);
-
-    }
-
-    private List<String> getReviewsFromResult(String response) {
-        //parse the json result to get the reviews
-        JSONObject jPlaces = null;
-        List<String> reviewsText = new ArrayList<>();
-        try {
-            jPlaces = new JSONObject(response).getJSONObject("result");
-            JSONArray reviews = jPlaces.getJSONArray("reviews");
-            for (int i = 0; i < reviews.length(); i++) {
-                System.out.println("THE JSON OBJECT: " + reviews.get(i).toString());
-                reviewsText.add(reviews.getJSONObject(i).getString("text"));
-            }
-
-        } catch (JSONException e) {
-            e.printStackTrace();
+        if (posRateNum > 0) {
+            float perc = (float) (posRateNum / (total * 1.0));
+            posRate = Math.round( (perc * 100));
         }
-        return reviewsText;
+        if (negRateNum > 0) {
+            float perc = (float) (negRateNum / (total * 1.0));
+            negRate = Math.round( (perc * 100));
+        }
+        System.out.println("THE POSITIVE: " + posRateNum);
+        System.out.println("THE NEGATIVe: " + negRateNum);
+        System.out.println("THE POSITIVE2: " + posRate);
+        System.out.println("THE NEGATIVe2: " + negRate);
+
+        txvPos.setText(posRate + " %");
+        txvNeg.setText(negRate + " %");
+
+
+        //set WordCloud
+        setWordCloud(hashMap);
+
+
     }
 
-    public StringBuilder getAPILike() {
+    private void setWordCloud(HashMap<String, Integer> hashMap) {
+        List<WordCloud> wordCloudList = new ArrayList<>();
 
 
-        StringBuilder sb = new StringBuilder("https://maps.googleapis.com/maps/api/place/details/json?");
-        sb.append("place_id=" + itemModel.getItemId());
-        sb.append("&fields=" + "reviews");
-        sb.append("&key=" + getResources().getString(R.string.api_key));
+        //add the words and its repetitive number to list then display it.
+        Iterator<String> iterator = hashMap.keySet().iterator();
+        for (Iterator<String> it = iterator; it.hasNext(); ) {
+            //the comment
+            String key = it.next();
+            // num of
+            int value = hashMap.get(key);
+            wordCloudList.add(new WordCloud(key, value));
 
-        return sb;
+        }
+
+        wordCloud.setDataSet(wordCloudList);
+        //set scale between 25 and max 70
+        wordCloud.setScale(maxWordCloudScale, minWordCloudScale);
+
+        wordCloud.setColors(ColorTemplate.MATERIAL_COLORS);
+        if (wordCloudList.size() > 20) {
+            wordCloud.setSize(800, 550);
+
+        } else if (wordCloudList.size() > 10) {
+            wordCloud.setSize(600, 450);
+
+        } else {
+            wordCloud.setSize(300, 350);
+
+        }
+        wordCloud.notifyDataSetChanged();
     }
-
-    private void setWordCloud() {
-        //get btn rates from firebase
-        FirebaseUtility.getBtnRates(activity, itemModel.getItemName(), new GetAllRatesInterface() {
-            @Override
-            public void finish(List<RateModel> rateModels) {
-
-                HashMap<String, Integer> hashMap = new HashMap<>();
-                List<WordCloud> wordCloudList = new ArrayList<>();
-                int min = 25;
-                int max = 70;
-                //add all words to hashmap to collect word's repetitive.
-                for (RateModel rateModel : rateModels) {
-                    System.out.println("THE RATE IS: " + rateModel.getComment());
-                    if (hashMap.containsKey(rateModel.getComment())) {
-                        int num = hashMap.get(rateModel.getComment()) + 1;
-                        hashMap.remove(rateModel.getComment());
-                        if (num > max) {
-                            num = max;
-                        }
-                        hashMap.put(rateModel.getComment(), num);
-                    } else {
-                        hashMap.put(rateModel.getComment(), 30);
-
-                    }
-
-                }
-                hashMap.put(".", min);
-
-                //add the words and its repetitive number to list then display it.
-                Iterator<String> iterator = hashMap.keySet().iterator();
-                for (Iterator<String> it = iterator; it.hasNext(); ) {
-                    String key = it.next();
-                    int value = hashMap.get(key);
-                    wordCloudList.add(new WordCloud(key, value));
-
-                }
-
-                wordCloud.setDataSet(wordCloudList);
-                //set scale between 25 and max 70
-                wordCloud.setScale(max, min);
-                wordCloud.setColors(ColorTemplate.MATERIAL_COLORS);
-                wordCloud.setSize(250, 300);
-                wordCloud.notifyDataSetChanged();
-            }
-        });
-    }
-
-
 }
