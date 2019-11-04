@@ -237,7 +237,7 @@ public class ItemRateFragment extends Fragment {
                 break;
         }
 
-        if (comment.equals("")) {
+        if (!newSelect) {
             //no one selected, display all comments
             setAdapter(rateModelList);
         } else {
@@ -560,6 +560,7 @@ public class ItemRateFragment extends Fragment {
         StringBuilder sb = new StringBuilder("https://maps.googleapis.com/maps/api/place/details/json?");
         sb.append("place_id=" + itemModel.getItemId());
         sb.append("&fields=" + "reviews,name");
+        sb.append("&language=" + "ar");
         sb.append("&key=" + getResources().getString(R.string.api_key));
 
         return sb;
