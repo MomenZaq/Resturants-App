@@ -169,6 +169,8 @@ public class ItemPublicRateFragment extends Fragment {
             wordCloudList.add(new WordCloud(key, value));
 
         }
+        wordCloudList.add(new WordCloud(".", minWordCloudScale));
+        wordCloudList.add(new WordCloud(".", minWordCloudScale+1));
 
         wordCloud.setDataSet(wordCloudList);
         //set scale between 25 and max 70
