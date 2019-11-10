@@ -19,10 +19,10 @@
             android:id="@+id/img_setting"
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:onClick="setting"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="12dp"
             android:layout_marginBottom="8dp"
+            android:onClick="setting"
             android:src="@drawable/ic_setting"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -33,9 +33,9 @@
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_marginTop="8dp"
-            android:onClick="logout"
             android:layout_marginEnd="12dp"
             android:layout_marginBottom="8dp"
+            android:onClick="logout"
             android:src="@drawable/ic_logout"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/img_setting"
@@ -45,10 +45,10 @@
             android:id="@+id/img_back"
             android:layout_width="20dp"
             android:layout_height="20dp"
-android:onClick="back"
             android:layout_marginStart="12dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
+            android:onClick="back"
             android:src="@drawable/ic_back"
 
             app:layout_constraintBottom_toBottomOf="parent"
@@ -86,17 +86,26 @@ android:onClick="back"
         app:layout_constraintTop_toBottomOf="@+id/edt_search" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="match_parent"
         android:id="@+id/recycler"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
         android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        tools:listitem="@layout/row_item"
-        app:layout_constraintTop_toBottomOf="@+id/txv_near"></androidx.recyclerview.widget.RecyclerView>
+        app:layout_constraintBottom_toTopOf="@id/powerd_by_google"
+        app:layout_constraintTop_toBottomOf="@+id/txv_near"
+        tools:listitem="@layout/row_item"></androidx.recyclerview.widget.RecyclerView>
 
+    <ImageView
+        android:id="@+id/powerd_by_google"
+        android:layout_width="200dp"
+        android:layout_height="25dp"
+        android:layout_margin="10dp"
+        android:background="@drawable/pbg"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"></ImageView>
 
     <ProgressBar
         android:id="@+id/progress"
@@ -114,17 +123,16 @@ android:onClick="back"
         android:id="@+id/txv_no_data"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="gone"
         android:layout_marginStart="16dp"
         android:text="@string/no_data"
         android:textAppearance="@style/fontLight"
         android:textColor="@color/colorFont"
         android:textSize="14sp"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

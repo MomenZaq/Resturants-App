@@ -63,6 +63,10 @@ public class ItemRateFragment extends Fragment {
     private Button btnComment2;
     private Button btnComment3;
     private Button btnComment4;
+    private Button btnComment5;
+    private Button btnComment6;
+    private Button btnComment7;
+    private Button btnComment8;
 
 
     private RecyclerView recycle;
@@ -147,6 +151,10 @@ public class ItemRateFragment extends Fragment {
             btnComment2 = (Button) v.findViewById(R.id.btn_comment_2);
             btnComment3 = (Button) v.findViewById(R.id.btn_comment_3);
             btnComment4 = (Button) v.findViewById(R.id.btn_comment_4);
+            btnComment5 = (Button) v.findViewById(R.id.btn_comment_5);
+            btnComment6 = (Button) v.findViewById(R.id.btn_comment_6);
+            btnComment7 = (Button) v.findViewById(R.id.btn_comment_7);
+            btnComment8 = (Button) v.findViewById(R.id.btn_comment_8);
 
 //set vertical layout manager for recyclerView
             LinearLayoutManager layoutManager = new LinearLayoutManager(activity);
@@ -197,6 +205,30 @@ public class ItemRateFragment extends Fragment {
                     filterBtnRate(4);
                 }
             });
+            btnComment5.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    filterBtnRate(5);
+                }
+            });
+            btnComment6.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    filterBtnRate(6);
+                }
+            });
+            btnComment7.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    filterBtnRate(7);
+                }
+            });
+            btnComment8.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    filterBtnRate(8);
+                }
+            });
         }
     }
 
@@ -234,6 +266,34 @@ public class ItemRateFragment extends Fragment {
                     comment = btnComment4.getText().toString();
                 }
                 markCurrentBtn(btnComment4, newSelect);
+                break;
+            case 5:
+                if (btnComment5.getTag().equals("off")) {
+                    newSelect = true;
+                    comment = btnComment5.getText().toString();
+                }
+                markCurrentBtn(btnComment5, newSelect);
+                break;
+            case 6:
+                if (btnComment6.getTag().equals("off")) {
+                    newSelect = true;
+                    comment = btnComment6.getText().toString();
+                }
+                markCurrentBtn(btnComment6, newSelect);
+                break;
+            case 7:
+                if (btnComment7.getTag().equals("off")) {
+                    newSelect = true;
+                    comment = btnComment7.getText().toString();
+                }
+                markCurrentBtn(btnComment7, newSelect);
+                break;
+            case 8:
+                if (btnComment8.getTag().equals("off")) {
+                    newSelect = true;
+                    comment = btnComment8.getText().toString();
+                }
+                markCurrentBtn(btnComment8, newSelect);
                 break;
         }
 
@@ -284,15 +344,23 @@ public class ItemRateFragment extends Fragment {
         btnComment2.setTag("off");
         btnComment3.setTag("off");
         btnComment4.setTag("off");
+        btnComment5.setTag("off");
+        btnComment6.setTag("off");
+        btnComment7.setTag("off");
+        btnComment8.setTag("off");
         btnComment1.setBackgroundColor(ContextCompat.getColor(activity, R.color.gray));
         btnComment2.setBackgroundColor(ContextCompat.getColor(activity, R.color.gray));
         btnComment3.setBackgroundColor(ContextCompat.getColor(activity, R.color.gray));
         btnComment4.setBackgroundColor(ContextCompat.getColor(activity, R.color.gray));
+        btnComment5.setBackgroundColor(ContextCompat.getColor(activity, R.color.gray));
+        btnComment6.setBackgroundColor(ContextCompat.getColor(activity, R.color.gray));
+        btnComment7.setBackgroundColor(ContextCompat.getColor(activity, R.color.gray));
+        btnComment8.setBackgroundColor(ContextCompat.getColor(activity, R.color.gray));
 
-        if (newSelect){
+        if (newSelect) {
             //put the tag to current btn "on" to mark it as a selected button
-        selectedBtn.setTag("on");
-        selectedBtn.setBackgroundColor(ContextCompat.getColor(activity, R.color.colorPrimaryDark));
+            selectedBtn.setTag("on");
+            selectedBtn.setBackgroundColor(ContextCompat.getColor(activity, R.color.colorPrimaryDark));
         }
     }
 
@@ -479,6 +547,10 @@ public class ItemRateFragment extends Fragment {
     }
 
     private void setMostWordToButtons() {
+        btnComment8.setVisibility(View.GONE);
+        btnComment7.setVisibility(View.GONE);
+        btnComment6.setVisibility(View.GONE);
+        btnComment5.setVisibility(View.GONE);
         btnComment4.setVisibility(View.GONE);
         btnComment3.setVisibility(View.GONE);
         btnComment2.setVisibility(View.GONE);
@@ -511,6 +583,34 @@ public class ItemRateFragment extends Fragment {
 
                 btnComment4.setText(word);
                 btnComment4.setVisibility(View.VISIBLE);
+
+                break;
+
+            } else if (i == 5) {
+
+                btnComment5.setText(word);
+                btnComment5.setVisibility(View.VISIBLE);
+
+                break;
+
+            } else if (i == 6) {
+
+                btnComment6.setText(word);
+                btnComment6.setVisibility(View.VISIBLE);
+
+                break;
+
+            } else if (i == 7) {
+
+                btnComment7.setText(word);
+                btnComment7.setVisibility(View.VISIBLE);
+
+                break;
+
+            } else if (i == 8) {
+
+                btnComment8.setText(word);
+                btnComment8.setVisibility(View.VISIBLE);
 
                 break;
 
