@@ -584,28 +584,23 @@ public class ItemRateFragment extends Fragment {
                 btnComment4.setText(word);
                 btnComment4.setVisibility(View.VISIBLE);
 
-                break;
 
             } else if (i == 5) {
 
                 btnComment5.setText(word);
                 btnComment5.setVisibility(View.VISIBLE);
 
-                break;
 
             } else if (i == 6) {
 
                 btnComment6.setText(word);
                 btnComment6.setVisibility(View.VISIBLE);
 
-                break;
 
             } else if (i == 7) {
 
                 btnComment7.setText(word);
                 btnComment7.setVisibility(View.VISIBLE);
-
-                break;
 
             } else if (i == 8) {
 
