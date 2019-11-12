@@ -21,6 +21,7 @@ import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityOptionsCompat;
 import androidx.core.content.ContextCompat;
+import androidx.core.view.ViewCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -155,6 +156,15 @@ public class ItemRateFragment extends Fragment {
             btnComment6 = (Button) v.findViewById(R.id.btn_comment_6);
             btnComment7 = (Button) v.findViewById(R.id.btn_comment_7);
             btnComment8 = (Button) v.findViewById(R.id.btn_comment_8);
+
+
+            recycle.setNestedScrollingEnabled(false);
+            ViewCompat.setNestedScrollingEnabled(recycle, false);
+            recycle.setHasFixedSize(true);
+            recycle.setItemViewCacheSize(20);
+            recycle.setDrawingCacheEnabled(true);
+            recycle.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
+            ViewCompat.setNestedScrollingEnabled(recycle, false);
 
 //set vertical layout manager for recyclerView
             LinearLayoutManager layoutManager = new LinearLayoutManager(activity);
